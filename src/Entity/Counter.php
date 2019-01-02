@@ -42,6 +42,7 @@ class Counter
     {
         $this->actions = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->count = 0;
     }
 
     public function getId(): ?int

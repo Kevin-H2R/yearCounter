@@ -24,6 +24,8 @@ class HomeController extends AbstractController
      */
     public function index(Request $request)
     {
+        $counterRepository = $this->getDoctrine()->getRepository(Counter::class);
+        $counters = $counterRepository->findAll();
         $counter = new Counter();
         $form = $this->createForm(CounterType::class, $counter);
 
@@ -39,6 +41,7 @@ class HomeController extends AbstractController
 
         return $this->render('home.html.twig', [
            'form' => $form->createView(),
+            'counters' => $counters,
         ]);
     }
 }

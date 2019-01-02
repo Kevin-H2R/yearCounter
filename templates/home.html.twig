@@ -9,4 +9,9 @@
         {{ form_widget(form) }}
         <input type="submit" class="btn" value="Create"/>
     {{ form_end(form) }}
+    {% for counter in counters %}
+        <div>
+            <span>{{ counter.name }}</span>
+        </div>
+    {% endfor %}
 {% endblock %}

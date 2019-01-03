@@ -15,7 +15,11 @@
 
 import Vue from 'vue';
 import Vuetify from 'vuetify';
-
-console.log('coucou');
+import App from './vue/App';
 
 Vue.use(Vuetify);
+new Vue({
+    el: '#app',
+    template: '<App />',
+    components: {App}
+})

@@ -20,6 +20,5 @@ import App from './vue/App';
 Vue.use(Vuetify);
 new Vue({
     el: '#app',
-    template: '<App />',
     components: {App}
 })

@@ -5,7 +5,13 @@
 </template>
 <script>
     export default {
-        name: 'App'
+        name: 'App',
+        props: {
+            counters: {
+                type: Array,
+                required: true
+            }
+        }
     }
 </script>
 <style lang="scss">

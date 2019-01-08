@@ -1,16 +1,10 @@
 <template>
-    <!--<v-app>-->
-    <!--<v-content>-->
-    <!--<v-container>-->
     <div class="title-container">
         <h1 class="title-container__title">Coucou</h1>
         <span v-for="(counter, index) in counters" :key="index">
             <CounterRow v-bind="counter"/>
         </span>
     </div>
-    <!--</v-container>-->
-    <!--</v-content>-->
-    <!--</v-app>-->
 </template>
 <script>
     import CounterRow from './CounterRow'

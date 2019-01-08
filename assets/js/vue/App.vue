@@ -4,7 +4,9 @@
     <!--<v-container>-->
     <div class="title-container">
         <h1 class="title-container__title">Coucou</h1>
-        <CounterRow/>
+        <span v-for="(counter, index) in counters" :key="index">
+            <CounterRow v-bind="counter"/>
+        </span>
     </div>
     <!--</v-container>-->
     <!--</v-content>-->

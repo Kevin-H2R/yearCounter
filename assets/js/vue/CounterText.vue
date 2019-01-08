@@ -1,7 +1,7 @@
 <template>
     <v-layout column class="counter-text">
         <v-flex xs7 class="counter-text__name">{{ name }}</v-flex>
-        <v-flex xs5 class="counter-text__counter">{{ counter }}</v-flex>
+        <v-flex xs5 class="counter-text__counter">{{ count }}</v-flex>
     </v-layout>
 </template>
 <script>
@@ -10,13 +10,11 @@
         props: {
             name: {
                 type: String,
-                required: false,
-                default: 'Prout'
+                required: true
             },
-            counter: {
+            count: {
                 type: Number,
-                required: false,
-                default: 15
+                required: true
             }
         }
     }

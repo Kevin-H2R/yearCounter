@@ -14,6 +14,7 @@ use App\Form\CounterType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class HomeController extends AbstractController
 {
@@ -22,7 +23,7 @@ class HomeController extends AbstractController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, SerializerInterface $serializer)
     {
         $counterRepository = $this->getDoctrine()->getRepository(Counter::class);
         $counters = $counterRepository->findAll();
@@ -41,7 +42,7 @@ class HomeController extends AbstractController
 
         return $this->render('home.html.twig', [
            'form' => $form->createView(),
-            'counters' => $counters,
+            'counters' => $serializer->serialize($counters, 'json'),
         ]);
     }
 }

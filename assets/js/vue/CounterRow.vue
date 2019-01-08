@@ -10,7 +10,7 @@
                             </v-btn>
                         </v-flex>
                         <v-flex xs10 class="counter-row__text">
-                            <CounterText/>
+                            <CounterText :name="name" :count="count"/>
                         </v-flex>
                         <v-flex xs1>
                             <v-btn fab dark small color="primary">
@@ -28,7 +28,21 @@
 
     export default {
         name: 'CounterRow',
-        components: {CounterText}
+        components: {CounterText},
+        props: {
+            id: {
+                type: Number,
+                required: true
+            },
+            name: {
+                type: String,
+                required: true
+            },
+            count: {
+                type: Number,
+                required: true
+            }
+        }
     }
 </script>
 <style lang="scss">

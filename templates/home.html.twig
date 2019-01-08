@@ -12,11 +12,9 @@
 
 {% block body %}
     <v-layout column>
-        <div>
+        <div class="form-container">
             {% form_theme form 'form/fields.html.twig' %}
-            {#{{ form_start(form) }}#}
             {{ form_widget(form) }}
-            {#{{ form_end(form) }}#}
         </div>
         <div>
             <App :counters="{{ counters }}"/>

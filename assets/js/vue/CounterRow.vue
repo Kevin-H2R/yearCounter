@@ -3,7 +3,7 @@
         <v-container class="counter-row__container">
             <v-layout align-center justify-center>
                 <v-flex xs2>
-                    <v-btn fab dark small color="primary">
+                    <v-btn flat icon color="primary">
                         <v-icon dark>remove</v-icon>
                     </v-btn>
                 </v-flex>
@@ -11,7 +11,7 @@
                     <CounterText :name="name" :count="count"/>
                 </v-flex>
                 <v-flex xs2 class="counter-row__right-button">
-                    <v-btn fab dark small color="primary">
+                    <v-btn flat icon color="primary">
                         <v-icon dark>add</v-icon>
                     </v-btn>
                 </v-flex>

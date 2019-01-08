@@ -12,13 +12,15 @@
 
 {% block body %}
     <v-layout column>
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" class="btn" value="Create"/>
-        {{ form_end(form) }}
-        <v-container fluid>
+        <div>
+            {% form_theme form 'form/fields.html.twig' %}
+            {#{{ form_start(form) }}#}
+            {{ form_widget(form) }}
+            {#{{ form_end(form) }}#}
+        </div>
+        <div>
             <App :counters="{{ counters }}"/>
-        </v-container>
+        </div>
     </v-layout>
 {% endblock %}
 

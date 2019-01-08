@@ -2,15 +2,15 @@
     <v-card class="counter-row">
         <v-container class="counter-row__container">
             <v-layout align-center justify-center>
-                <v-flex xs1>
+                <v-flex xs2>
                     <v-btn fab dark small color="primary">
                         <v-icon dark>remove</v-icon>
                     </v-btn>
                 </v-flex>
-                <v-flex xs10 class="counter-row__text">
+                <v-flex xs8 class="counter-row__text">
                     <CounterText :name="name" :count="count"/>
                 </v-flex>
-                <v-flex xs1>
+                <v-flex xs2 class="counter-row__right-button">
                     <v-btn fab dark small color="primary">
                         <v-icon dark>add</v-icon>
                     </v-btn>
@@ -48,6 +48,9 @@
         }
         &__text {
             text-align: center;
+        }
+        &__right-button {
+            text-align: right;
         }
     }
 </style>

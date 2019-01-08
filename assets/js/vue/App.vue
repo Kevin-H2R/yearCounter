@@ -1,7 +1,6 @@
 <template>
-    <v-layout column class="title-container">
-        <h1 class="title-container__title">Coucou</h1>
-        <v-layout v-for="(counter, index) in counters"
+    <v-layout column class="main-container">
+        <v-layout v-for="(counter, index) in counters" class="main-container__counter"
                   :key="index">
             <v-flex xs12 sm8 offset-sm2>
                 <CounterRow v-bind="counter"/>
@@ -22,16 +21,13 @@
                 type: Array,
                 required: true
             }
-        },
-        mounted: function () {
-            console.log(this.$vuetify.breakpoint)
         }
     }
 </script>
 <style lang="scss">
-    .title-container {
-        &__title {
-            color: red;
+    .main-container {
+        &__counter {
+            margin: 4px 0;
         }
     }
 </style>

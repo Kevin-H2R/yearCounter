@@ -1,10 +1,13 @@
 <template>
-    <div class="title-container">
+    <v-layout column class="title-container">
         <h1 class="title-container__title">Coucou</h1>
-        <span v-for="(counter, index) in counters" :key="index">
-            <CounterRow v-bind="counter"/>
-        </span>
-    </div>
+        <v-layout v-for="(counter, index) in counters"
+                  :key="index">
+            <v-flex xs12 sm8 offset-sm2>
+                <CounterRow v-bind="counter"/>
+            </v-flex>
+        </v-layout>
+    </v-layout>
 </template>
 <script>
     import CounterRow from './CounterRow'
@@ -19,6 +22,9 @@
                 type: Array,
                 required: true
             }
+        },
+        mounted: function () {
+            console.log(this.$vuetify.breakpoint)
         }
     }
 </script>

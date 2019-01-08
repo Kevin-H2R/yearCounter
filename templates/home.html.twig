@@ -11,11 +11,15 @@
 {% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <input type="submit" class="btn" value="Create"/>
-    {{ form_end(form) }}
-    <App :counters="{{ counters }}"/>
+    <v-layout column>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" class="btn" value="Create"/>
+        {{ form_end(form) }}
+        <v-container fluid>
+            <App :counters="{{ counters }}"/>
+        </v-container>
+    </v-layout>
 {% endblock %}
 
 {% block javascripts %}

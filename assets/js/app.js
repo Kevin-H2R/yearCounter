@@ -18,9 +18,19 @@ import Vuetify from 'vuetify';
 import App from './vue/App';
 import 'vuetify/dist/vuetify.min.css'
 import '../css/app.scss'
+import axios from 'axios'
 
 Vue.use(Vuetify);
 new Vue({
     el: '#app',
     components: {App}
+})
+
+const form = document.getElementById('new-counter-form')
+form.addEventListener("submit", function (e) {
+    e.preventDefault()
+    const data = new FormData(form);
+    axios.post(form.action, data).then(function (response) {
+
+    })
 })

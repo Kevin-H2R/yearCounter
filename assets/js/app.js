@@ -19,6 +19,7 @@ import App from './vue/App';
 import 'vuetify/dist/vuetify.min.css'
 import '../css/app.scss'
 import axios from 'axios'
+import {EventBus} from "./event-bus";
 
 Vue.use(Vuetify);
 new Vue({
@@ -30,7 +31,8 @@ const form = document.getElementById('new-counter-form')
 form.addEventListener("submit", function (e) {
     e.preventDefault()
     const data = new FormData(form);
+    document.getElementById('counter_name').value = ''
     axios.post(form.action, data).then(function (response) {
-
+        EventBus.$emit('new-counter-added', response.data)
     })
 })

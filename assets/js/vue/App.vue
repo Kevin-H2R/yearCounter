@@ -1,6 +1,6 @@
 <template>
     <v-layout column class="main-container">
-        <v-layout v-for="(counter, index) in counters" class="main-container__counter"
+        <v-layout v-for="(counter, index) in counterArray" class="main-container__counter"
                   :key="index">
             <v-flex xs12 sm8 offset-sm2>
                 <CounterRow v-bind="counter"/>
@@ -10,6 +10,7 @@
 </template>
 <script>
     import CounterRow from './CounterRow'
+    import {EventBus} from "../event-bus";
 
     export default {
         name: 'App',
@@ -20,6 +21,16 @@
             counters: {
                 type: Array,
                 required: true
+            }
+        },
+        created: function () {
+            EventBus.$on('new-counter-added', (newCounter) => {
+                this.counterArray.push(JSON.parse(newCounter))
+            })
+        },
+        data: function () {
+            return {
+                counterArray: this.counters
             }
         }
     }

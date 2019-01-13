@@ -13,6 +13,7 @@ use App\Entity\Counter;
 use App\Form\CounterType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -37,7 +38,7 @@ class HomeController extends AbstractController
             $manager->persist($counter);
             $manager->flush();
 
-            return $this->redirectToRoute('home');
+            return new JsonResponse($serializer->serialize($counter, 'json'));
         }
 
         return $this->render('home.html.twig', [

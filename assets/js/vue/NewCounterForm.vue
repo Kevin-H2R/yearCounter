@@ -1,6 +1,6 @@
 <template>
-    <v-layout>
-        <v-flex xs12 sm6 md4 offset-sm3 offset-md4>
+    <v-layout justify-center>
+        <v-flex xs12 sm6 md4>
             <v-form v-model="valid" @submit="submit" onSubmit="return false;"
                     ref="form"
             >

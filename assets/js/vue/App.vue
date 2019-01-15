@@ -1,21 +1,22 @@
 <template>
-    <v-layout column>
-        <v-layout class="form-container">
+    <v-layout column jusitfy-start class="app-container">
+        <v-flex shrink class="app-container__new-counter">
             <NewCounterForm/>
-        </v-layout>
-        <v-layout column class="main-container">
-            <v-layout v-for="(counter, index) in counterArray" class="main-container__counter"
-                      :key="index">
-                <v-flex xs12 sm8 md6 offset-sm2 offset-md3>
+        </v-flex>
+        <v-flex>
+            <v-layout wrap justify-center>
+                <v-flex xs12 sm8 md5
+                        v-for="(counter, index) in counterArray"
+                        :key="index"
+                        class="app-container__counter"
+                >
                     <CounterRow v-bind="counter"/>
                 </v-flex>
-            </v-layout>
-            <v-layout class="layout main-container__counter" v-if="loading">
-                <v-flex xs12 sm8 offset-sm2>
+                <v-flex xs12 sm8 md5 class="app-container__counter" v-if="loading">
                     <LoadingRow/>
                 </v-flex>
             </v-layout>
-        </v-layout>
+        </v-flex>
     </v-layout>
 </template>
 <script>
@@ -23,7 +24,6 @@
     import {EventBus} from "../event-bus"
     import LoadingRow from './LoadingRow'
     import NewCounterForm from './NewCounterForm'
-
 
     export default {
         name: 'App',
@@ -56,9 +56,12 @@
     }
 </script>
 <style lang="scss">
-    .main-container {
+    .app-container {
+        &__new-counter {
+            margin-bottom: 2%;
+        }
         &__counter {
-            margin: 4px 0;
+            margin: 2px 4px;
         }
     }
 </style>

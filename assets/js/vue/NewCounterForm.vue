@@ -1,7 +1,9 @@
 <template>
     <v-layout>
         <v-flex xs12 sm6 offset-sm3>
-            <v-form v-model="valid" @submit="submit" onSubmit="return false;">
+            <v-form v-model="valid" @submit="submit" onSubmit="return false;"
+                    ref="form"
+            >
                 <v-card class="card-form">
                     <v-container fluid class="card-form__container">
                         <v-layout align-center>
@@ -18,7 +20,6 @@
                                     <v-btn id="submit-new-counter-button"
                                            fab small type="submit" color="success"
                                            :disabled="!valid"
-                                           @click="submit"
                                     >
                                         <v-icon dark>check</v-icon>
                                     </v-btn>
@@ -37,14 +38,17 @@
 
     export default {
         name: 'new-counter-form',
+        watch: {
+            name: function () {
+            }
+        },
         methods: {
             submit: function () {
                 this.valid = false
                 EventBus.$emit('new-counter-loading');
                 let that = this
                 axios.post('http://localhost:8000/new-counter', {'name': this.name}).then(function (response) {
-                    console.log(response.data)
-                    that.name = ''
+                    that.$refs.form.reset()
                     EventBus.$emit('new-counter-added', response.data)
                 })
             }
@@ -53,8 +57,7 @@
             valid: false,
             name: '',
             nameRules: [
-                v => !!v || 'Name is required',
-                v => v.length <= 50 || 'Name must be less than 50 characters'
+                v => !!v || 'Name is required'
             ]
         })
     }

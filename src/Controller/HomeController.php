@@ -29,27 +29,17 @@ class HomeController extends AbstractController
     {
         $counterRepository = $this->getDoctrine()->getRepository(Counter::class);
         $counters = $counterRepository->findAll();
-        $counter = new Counter();
-        $form = $this->createForm(CounterType::class, $counter);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $counter = $form->getData();
-            $manager = $this->getDoctrine()->getManager();
-            $manager->persist($counter);
-            $manager->flush();
-
-            return new JsonResponse($serializer->serialize($counter, 'json'));
-        }
 
         return $this->render('home.html.twig', [
-           'form' => $form->createView(),
             'counters' => $serializer->serialize($counters, 'json'),
         ]);
     }
 
     /**
      * @\Symfony\Component\Routing\Annotation\Route("/new-counter", name="post-counter")
+     * @param Request $request
+     * @param SerializerInterface $serializer
+     * @return JsonResponse
      */
     public function postCounter(Request $request, SerializerInterface $serializer)
     {
@@ -57,6 +47,10 @@ class HomeController extends AbstractController
         $counter = new Counter();
         $form = $this->createForm(CounterType::class, $counter);
         $form->submit($data);
+        $manager = $this->getDoctrine()->getManager();
+        $manager->persist($counter);
+        $manager->flush();
+
         return new JsonResponse($serializer->serialize($counter, 'json'));
     }
 }

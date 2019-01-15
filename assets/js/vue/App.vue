@@ -5,16 +5,21 @@
         </v-flex>
         <v-flex>
             <v-layout wrap justify-center>
-                <v-flex xs12 sm8 md5
+                <v-expand-transition
                         v-for="(counter, index) in counterArray"
-                        :key="index"
-                        class="app-container__counter"
-                >
-                    <CounterRow v-bind="counter"/>
-                </v-flex>
-                <v-flex xs12 sm8 md5 class="app-container__counter" v-if="loading">
-                    <LoadingRow/>
-                </v-flex>
+                        :key="index">
+                    <v-flex xs12 sm8 md5
+                            class="app-container__counter"
+                    >
+                        <CounterRow v-bind="counter"/>
+                    </v-flex>
+                </v-expand-transition>
+                <v-expand-transition>
+                    <v-flex xs12 sm8 md5 class="app-container__counter" v-if="loading">
+                        <LoadingRow/>
+                    </v-flex>
+                </v-expand-transition>
+
             </v-layout>
         </v-flex>
     </v-layout>
@@ -43,8 +48,11 @@
                 this.loading = true
             });
             EventBus.$on('new-counter-added', (newCounter) => {
-                this.counterArray.push(JSON.parse(newCounter))
                 this.loading = false
+                let that = this
+                setTimeout(function () {
+                    that.counterArray.push(JSON.parse(newCounter))
+                }, 320)
             })
         },
         data: function () {

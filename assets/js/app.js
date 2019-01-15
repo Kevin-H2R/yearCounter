@@ -29,10 +29,14 @@ new Vue({
 
 const form = document.getElementById('new-counter-form')
 form.addEventListener("submit", function (e) {
+    const submitButton = document.getElementById('submit-new-counter-button');
+    submitButton.setAttribute('disabled', 'disabled')
+    EventBus.$emit('new-counter-loading');
     e.preventDefault()
     const data = new FormData(form);
     document.getElementById('counter_name').value = ''
     axios.post(form.action, data).then(function (response) {
         EventBus.$emit('new-counter-added', response.data)
+        submitButton.removeAttribute('disabled')
     })
 })

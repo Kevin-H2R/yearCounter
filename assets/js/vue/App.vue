@@ -6,16 +6,24 @@
                 <CounterRow v-bind="counter"/>
             </v-flex>
         </v-layout>
+        <v-layout class="layout main-container__counter" v-if="loading">
+            <v-flex xs12 sm8 offset-sm2>
+                <LoadingRow/>
+            </v-flex>
+        </v-layout>
     </v-layout>
 </template>
 <script>
     import CounterRow from './CounterRow'
-    import {EventBus} from "../event-bus";
+    import {EventBus} from "../event-bus"
+    import LoadingRow from './LoadingRow'
+
 
     export default {
         name: 'App',
         components: {
-            CounterRow
+            CounterRow,
+            LoadingRow
         },
         props: {
             counters: {
@@ -24,13 +32,18 @@
             }
         },
         created: function () {
+            EventBus.$on('new-counter-loading', () => {
+                this.loading = true
+            });
             EventBus.$on('new-counter-added', (newCounter) => {
                 this.counterArray.push(JSON.parse(newCounter))
+                this.loading = false
             })
         },
         data: function () {
             return {
-                counterArray: this.counters
+                counterArray: this.counters,
+                loading: false
             }
         }
     }

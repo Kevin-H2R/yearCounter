@@ -6,7 +6,7 @@
         <v-layout column class="main-container">
             <v-layout v-for="(counter, index) in counterArray" class="main-container__counter"
                       :key="index">
-                <v-flex xs12 sm8 offset-sm2>
+                <v-flex xs12 sm8 md6 offset-sm2 offset-md3>
                     <CounterRow v-bind="counter"/>
                 </v-flex>
             </v-layout>

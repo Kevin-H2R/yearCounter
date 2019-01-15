@@ -11,15 +11,7 @@
 {% endblock %}
 
 {% block body %}
-    {#<v-layout column>#}
-        {#<div class="form-container">#}
-            {#{% form_theme form 'form/fields.html.twig' %}#}
-            {#{{ form_widget(form, {'attr': {'id': 'new-counter-form'}}) }}#}
-        {#</div>#}
-        <div>
-            <App :counters="{{ counters }}"/>
-        </div>
-    {#</v-layout>#}
+        <App :counters="{{ counters }}"/>
 {% endblock %}
 
 {% block javascripts %}

@@ -47,4 +47,16 @@ class HomeController extends AbstractController
             'counters' => $serializer->serialize($counters, 'json'),
         ]);
     }
+
+    /**
+     * @\Symfony\Component\Routing\Annotation\Route("/new-counter", name="post-counter")
+     */
+    public function postCounter(Request $request, SerializerInterface $serializer)
+    {
+        $data = json_decode($request->getContent(), true);
+        $counter = new Counter();
+        $form = $this->createForm(CounterType::class, $counter);
+        $form->submit($data);
+        return new JsonResponse($serializer->serialize($counter, 'json'));
+    }
 }

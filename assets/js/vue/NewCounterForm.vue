@@ -1,18 +1,24 @@
 <template>
     <v-layout>
         <v-flex xs12 sm6 offset-sm3>
-            <v-form>
+            <v-form v-model="valid" @submit="submit" onSubmit="return false;">
                 <v-card class="card-form">
                     <v-container fluid class="card-form__container">
                         <v-layout align-center>
                             <v-flex xs9 offset-xs1>
-                                <v-text-field></v-text-field>
+                                <v-text-field
+                                        v-model="name"
+                                        :rules="nameRules"
+                                        label="Name"
+                                        required
+                                ></v-text-field>
                             </v-flex>
                             <v-flex xs1>
                                 <v-card-actions>
                                     <v-btn id="submit-new-counter-button"
                                            fab small type="submit" color="success"
-                                           disabled
+                                           :disabled="!valid"
+                                           @click="submit"
                                     >
                                         <v-icon dark>check</v-icon>
                                     </v-btn>
@@ -26,8 +32,31 @@
     </v-layout>
 </template>
 <script>
+    import {EventBus} from "../event-bus"
+    import axios from 'axios'
+
     export default {
-        name: 'new-counter-form'
+        name: 'new-counter-form',
+        methods: {
+            submit: function () {
+                this.valid = false
+                EventBus.$emit('new-counter-loading');
+                let that = this
+                axios.post('http://localhost:8000/new-counter', {'name': this.name}).then(function (response) {
+                    console.log(response.data)
+                    that.name = ''
+                    EventBus.$emit('new-counter-added', response.data)
+                })
+            }
+        },
+        data: () => ({
+            valid: false,
+            name: '',
+            nameRules: [
+                v => !!v || 'Name is required',
+                v => v.length <= 50 || 'Name must be less than 50 characters'
+            ]
+        })
     }
 </script>
 <style lang="scss">
